@@ -3,6 +3,8 @@ MAINTAINER uji
 RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache \
+    make \
+    bash \
     curl \
     gcc \
     git \
@@ -12,11 +14,11 @@ RUN apk add --no-cache \
     python-dev \
     py-pip \
     python3-dev \
-    py3-pip && \
+    py3-pip \
+    go \
+    npm && \
     rm -rf /var/cache/apk/*
 RUN pip3 install --upgrade pip neovim
-RUN git clone https://github.com/uji/dotfiles.git
-RUN mkdir ~/.config
-RUN cp -r dotfiles/.vim ~/.config/nvim
-RUN ln -sf ~/dotfiles/.vimrc ~/.config/nvim/init.vim
-ENTRYPOINT ["nvim"]
+RUN git clone https://github.com/uji/dotfiles.git --recursive ~/dotfiles
+RUN cd ~/dotfiles && make install
+WORKDIR ~/src

@@ -3,15 +3,18 @@ MAINTAINER uji
 RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache \
+    make \
+    bash \
     curl \
+    vim \
     git \
     linux-headers \
     musl-dev\
-    vim \
     python3-dev \
-    py3-pip && \
+    py3-pip \
+    go \
+    npm && \
     rm -rf /var/cache/apk/*
-RUN mkdir ~/.config
-RUN cp -r dotfiles/.vim ~/.config/nvim
-RUN ln -sf ~/dotfiles/.vimrc ~/.config/nvim/init.vim
-ENTRYPOINT ["vim"]
+RUN git clone https://github.com/uji/dotfiles.git --recursive ~/dotfiles
+RUN cd ~/dotfiles && make install
+WORKDIR /root/src
