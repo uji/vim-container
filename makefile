@@ -13,11 +13,6 @@ run-vim: .env
 	--env-file=.env \
 	--name vim vim
 
-.PHONY: start-vim
-start-vim:
-	docker start vim
-	docker exec -it vim /bin/bash
-
 .PHONY: build-nvim
 build-nvim:
 	docker build --rm -f Dockerfile.nvim -t nvim .
@@ -29,11 +24,6 @@ run-nvim: .env
 	--mount source=$(VOLUME),target=/root/src \
 	--env-file=.env \
 	--name nvim nvim
-
-.PHONY: start-nvim
-start-nvim:
-	docker start nvim
-	docker exec -it nvim /bin/bash
 
 .PHONY: initv
 initv:
