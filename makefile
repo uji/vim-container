@@ -3,19 +3,19 @@
 
 .PHONY: build-vim
 build-vim:
-	docker build --rm -f Dockerfile.vim -t vim .
+	docker build --rm -f vim/Dockerfile -t vim .
 
 .PHONY: run-vim
 run-vim: .env
 	docker run --rm -it \
 	--mount source=vim,target=/root/.cache \
-	--mount source=$(VOLUME),target=/root/src \
+	--mount source=$(VOLUME),target=/work \
 	--env-file=.env \
 	--name vim vim
 
 .PHONY: build-nvim
 build-nvim:
-	docker build --rm -f Dockerfile.nvim -t nvim .
+	docker build --rm -f nvim/Dockerfile -t nvim .
 
 .PHONY: run-nvim
 run-nvim: .env
