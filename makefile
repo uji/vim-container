@@ -8,7 +8,6 @@ build-vim:
 .PHONY: run-vim
 run-vim: .env
 	docker run --rm -it \
-	--mount source=vim,target=/root/.cache \
 	--mount source=$(VOLUME),target=/work \
 	--env-file=.env \
 	--name vim vim
@@ -20,11 +19,6 @@ build-nvim:
 .PHONY: run-nvim
 run-nvim: .env
 	docker run --rm -it \
-	--mount source=vim,target=/root/.cache \
-	--mount source=$(VOLUME),target=/root/src \
+	--mount source=$(VOLUME),target=/work \
 	--env-file=.env \
 	--name nvim nvim
-
-.PHONY: initv
-initv:
-	docker volume create vim

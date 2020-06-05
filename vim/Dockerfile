@@ -14,9 +14,7 @@ RUN apk add --no-cache \
     go \
     npm && \
     rm -rf /var/cache/apk/*
-RUN git clone https://github.com/uji/dotfiles.git --recursive ~/dotfiles
-RUN cd ~/dotfiles && git submodule update --remote
-RUN cd ~/dotfiles/vimrc && git submodule update --init
-RUN sh ~/dotfiles/ln.sh
+RUN git clone https://github.com/uji/dotfiles.git ~/dotfiles
+RUN cd ~/dotfiles && sh install-linux.sh
 RUN mkdir /work
 WORKDIR /work

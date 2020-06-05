@@ -10,6 +10,7 @@ RUN apk add --no-cache \
     git \
     linux-headers \
     musl-dev\
+    vim \
     neovim \
     python-dev \
     py-pip \
@@ -19,6 +20,7 @@ RUN apk add --no-cache \
     npm && \
     rm -rf /var/cache/apk/*
 RUN pip3 install --upgrade pip neovim
-RUN git clone https://github.com/uji/dotfiles.git --recursive ~/dotfiles
-RUN cd ~/dotfiles && make install
-WORKDIR ~/src
+RUN git clone https://github.com/uji/dotfiles.git ~/dotfiles
+RUN cd ~/dotfiles && sh install-linux.sh
+RUN mkdir /work
+WORKDIR /work
