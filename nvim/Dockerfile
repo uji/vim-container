@@ -8,6 +8,8 @@ RUN apk add --no-cache \
     curl \
     gcc \
     git \
+    fzf \
+    the_silver_searcher \
     linux-headers \
     musl-dev\
     vim \
@@ -24,3 +26,4 @@ RUN git clone https://github.com/uji/dotfiles.git ~/dotfiles
 RUN cd ~/dotfiles && sh install-linux.sh
 RUN mkdir /work
 WORKDIR /work
+ENTRYPOINT bash
